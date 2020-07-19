@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.user.dao.userMapper">
+  <resultMap id="BaseResultMap" type="com.user.entity.user">
+    <id column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="userpwd" jdbcType="VARCHAR" property="userpwd" />
+    <result column="userrole" jdbcType="INTEGER" property="userrole" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="reputation" jdbcType="VARCHAR" property="reputation" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="typeid" jdbcType="INTEGER" property="typeid" />
+    <result column="stau" jdbcType="INTEGER" property="stau" />
+    <result column="money" jdbcType="INTEGER" property="money" />
+
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    userid, username, userpwd, userrole, sex, reputation, age, phone,typeid,stau,money
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+
+  <select id="login" parameterType="com.user.entity.user" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where username = #{username,jdbcType=VARCHAR} and userpwd = #{userpwd,jdbcType=VARCHAR}
+  </select>
+  <select id="list" parameterType="com.user.entity.user" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      1=1
+        <if test="userid != null">
+          and  userid= #{userid,jdbcType=INTEGER}
+        </if>
+        <if test="username != null">
+          and  username=#{username,jdbcType=VARCHAR}
+        </if>
+        <if test="userpwd != null">
+          and userpwd= #{userpwd,jdbcType=VARCHAR}
+        </if>
+        <if test="userrole != null">
+          and userrole=  #{userrole,jdbcType=INTEGER}
+        </if>
+      <if test="sex != null">
+        and sex = #{sex,jdbcType=VARCHAR}
+      </if>
+      <if test="reputation != null">
+        and   reputation = #{reputation,jdbcType=VARCHAR}
+      </if>
+      <if test="age != null">
+        and  age = #{age,jdbcType=INTEGER}
+      </if>
+      <if test="phone != null">
+        and  phone = #{phone,jdbcType=VARCHAR}
+      </if>
+      <if test="typeid != null">
+        and  typeid = #{typeid,jdbcType=INTEGER}
+      </if>
+      <if test="stau != null">
+        and  stau = #{stau,jdbcType=INTEGER}
+      </if>
+      <if test="money != null">
+        and  money = #{money,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.user.entity.user">
+    insert into user (userid, username, userpwd, 
+      userrole, sex, reputation, 
+      age, phone,typeid,stau,money)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpwd,jdbcType=VARCHAR}, 
+      #{userrole,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{reputation,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR},#{typeid,jdbcType=INTEGER},#{stau,jdbcType=INTEGER},#{money,jdbcType=INTEGER}))
+  </insert>
+  <insert id="insertSelective" parameterType="com.user.entity.user">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="userpwd != null">
+        userpwd,
+      </if>
+      <if test="userrole != null">
+        userrole,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="reputation != null">
+        reputation,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="typeid != null">
+        typeid,
+      </if>
+      <if test="stau != null">
+        stau,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpwd != null">
+        #{userpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userrole != null">
+        #{userrole,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="reputation != null">
+        #{reputation,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null">
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="stau != null">
+        #{stau,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.user.entity.user">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpwd != null">
+        userpwd = #{userpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userrole != null">
+        userrole = #{userrole,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="reputation != null">
+        reputation = #{reputation,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null">
+        typeid = #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="stau != null">
+        stau = #{stau,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=INTEGER},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.user.entity.user">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      userpwd = #{userpwd,jdbcType=VARCHAR},
+      userrole = #{userrole,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      reputation = #{reputation,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

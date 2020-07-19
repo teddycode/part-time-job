@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.part_time_job.dao.part_time_jobMapper">
+  <resultMap id="BaseResultMap" type="com.part_time_job.entity.part_time_job">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="pval" jdbcType="VARCHAR" property="pval" />
+    <result column="psage" jdbcType="INTEGER" property="psage" />
+    <result column="peage" jdbcType="INTEGER" property="peage" />
+    <result column="psex" jdbcType="VARCHAR" property="psex" />
+    <result column="preputation" jdbcType="INTEGER" property="preputation" />
+    <result column="pmoney" jdbcType="INTEGER" property="pmoney" />
+    <result column="pstau" jdbcType="INTEGER" property="pstau" />
+    <result column="pcount" jdbcType="INTEGER" property="pcount" />
+    <result column="puserid" jdbcType="INTEGER" property="puserid" />
+    <result column="ptype" jdbcType="INTEGER" property="ptype" />
+    <result column="puserreputation" jdbcType="INTEGER" property="puserreputation" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, pname, pval, psage, peage, psex, preputation, pmoney, pstau, pcount, puserid,puserreputation,ptype
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from part_time_job
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <select id="list" parameterType="com.part_time_job.entity.part_time_job" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from part_time_job
+    <where>
+      1=1
+      <if test="pid != null">
+        and  pid = #{pid,jdbcType=INTEGER}
+      </if>
+      <if test="pname != null">
+      and  pname = #{pname,jdbcType=VARCHAR}
+      </if>
+      <if test="pval != null">
+       and pval = #{pval,jdbcType=VARCHAR}
+      </if>
+      <if test="psage != null">
+        and psage = #{psage,jdbcType=INTEGER}
+      </if>
+      <if test="peage != null">
+        and peage = #{peage,jdbcType=INTEGER}
+      </if>
+      <if test="psex != null">
+        and psex = #{psex,jdbcType=VARCHAR}
+      </if>
+      <if test="preputation != null">
+        and preputation = #{preputation,jdbcType=INTEGER}
+      </if>
+      <if test="pmoney != null">
+        and pmoney = #{pmoney,jdbcType=INTEGER}
+      </if>
+      <if test="pstau != null">
+        and pstau = #{pstau,jdbcType=INTEGER}
+      </if>
+      <if test="pcount != null">
+        and pcount = #{pcount,jdbcType=INTEGER}
+      </if>
+      <if test="puserid != null">
+        and  puserid = #{puserid,jdbcType=INTEGER}
+      </if>
+      <if test="puserreputation != null">
+        and  puserreputation = #{puserreputation,jdbcType=INTEGER}
+      </if>
+      <if test="ptype != null">
+        and  ptype = #{ptype,jdbcType=INTEGER}
+      </if>
+      <if test="sql != null">
+
+      #{sql,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+  <select id="sellist" parameterType="com.alibaba.fastjson.JSONObject" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from part_time_job
+    <where>
+      1=1
+      <if test="part_time_job.pid != null">
+        and  pid = #{part_time_job.pid,jdbcType=INTEGER}
+      </if>
+      <if test="part_time_job.pname != null">
+        and  pname = #{part_time_job.pname,jdbcType=VARCHAR}
+      </if>
+      <if test="part_time_job.pval != null">
+        and pval = #{part_time_job.pval,jdbcType=VARCHAR}
+      </if>
+      <if test="part_time_job.psage != null">
+        and psage = #{part_time_job.psage,jdbcType=INTEGER}
+      </if>
+      <if test="part_time_job.peage != null">
+        and peage = #{part_time_job.peage,jdbcType=INTEGER}
+      </if>
+      <if test="part_time_job.psex != null">
+        and psex = #{part_time_job.psex,jdbcType=VARCHAR}
+      </if>
+      <if test="part_time_job.preputation != null">
+        and preputation = #{part_time_job.preputation,jdbcType=INTEGER}
+      </if>
+      <if test="part_time_job.pmoney != null">
+        and pmoney = #{part_time_job.pmoney,jdbcType=INTEGER}
+      </if>
+      <if test="part_time_job.pstau != null">
+        and pstau = #{part_time_job.pstau,jdbcType=INTEGER}
+      </if>
+      <if test="part_time_job.pcount != null">
+        and pcount = #{part_time_job.pcount,jdbcType=INTEGER}
+      </if>
+      <if test="part_time_job.puserid != null">
+        and  puserid = #{part_time_job.puserid,jdbcType=INTEGER}
+      </if>
+      <if test="part_time_job.puserreputation != null">
+        and  puserreputation = #{part_time_job.puserreputation,jdbcType=INTEGER}
+      </if>
+      <if test="part_time_job.ptype != null">
+        and  ptype = #{part_time_job.ptype,jdbcType=INTEGER}
+      </if>
+
+
+    </where>
+    LIMIT  #{pageindex,jdbcType=INTEGER}, #{rows,jdbcType=INTEGER}
+
+  </select>
+
+
+  <select id="count" parameterType="com.part_time_job.entity.part_time_job" resultType="java.lang.Integer">
+    select count(*)
+    from part_time_job
+    <where>
+      1=1
+      <if test="pid != null">
+        and  pid = #{pid,jdbcType=INTEGER}
+      </if>
+      <if test="pname != null">
+        and  pname = #{pname,jdbcType=VARCHAR}
+      </if>
+      <if test="pval != null">
+        and pval = #{pval,jdbcType=VARCHAR}
+      </if>
+      <if test="psage != null">
+        and psage = #{psage,jdbcType=INTEGER}
+      </if>
+      <if test="peage != null">
+        and peage = #{peage,jdbcType=INTEGER}
+      </if>
+      <if test="psex != null">
+        and psex = #{psex,jdbcType=VARCHAR}
+      </if>
+      <if test="preputation != null">
+        and preputation = #{preputation,jdbcType=INTEGER}
+      </if>
+      <if test="pmoney != null">
+        and pmoney = #{pmoney,jdbcType=INTEGER}
+      </if>
+      <if test="pstau != null">
+        and pstau = #{pstau,jdbcType=INTEGER}
+      </if>
+      <if test="pcount != null">
+        and pcount = #{pcount,jdbcType=INTEGER}
+      </if>
+      <if test="puserid != null">
+        and  puserid = #{puserid,jdbcType=INTEGER}
+      </if>
+      <if test="puserreputation != null">
+        and  puserreputation = #{puserreputation,jdbcType=INTEGER}
+      </if>
+      <if test="ptype != null">
+        and  ptype = #{ptype,jdbcType=INTEGER}
+      </if>
+      <if test="sql != null">
+
+        #{sql,jdbcType=VARCHAR}
+      </if>
+    </where>
+
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from part_time_job
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.part_time_job.entity.part_time_job">
+    insert into part_time_job (pid, pname, pval, 
+      psage, peage, psex, 
+      preputation, pmoney, pstau, 
+      pcount, puserid)
+    values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{pval,jdbcType=VARCHAR}, 
+      #{psage,jdbcType=INTEGER}, #{peage,jdbcType=INTEGER}, #{psex,jdbcType=VARCHAR}, 
+      #{preputation,jdbcType=INTEGER}, #{pmoney,jdbcType=INTEGER}, #{pstau,jdbcType=INTEGER}, 
+      #{pcount,jdbcType=INTEGER}, #{puserid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.part_time_job.entity.part_time_job">
+    insert into part_time_job
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="pname != null">
+        pname,
+      </if>
+      <if test="pval != null">
+        pval,
+      </if>
+      <if test="psage != null">
+        psage,
+      </if>
+      <if test="peage != null">
+        peage,
+      </if>
+      <if test="psex != null">
+        psex,
+      </if>
+      <if test="preputation != null">
+        preputation,
+      </if>
+      <if test="pmoney != null">
+        pmoney,
+      </if>
+      <if test="pstau != null">
+        pstau,
+      </if>
+      <if test="pcount != null">
+        pcount,
+      </if>
+      <if test="puserid != null">
+        puserid,
+      </if>
+      <if test="puserreputation != null">
+          puserreputation,
+      </if>
+      <if test="ptype != null">
+          ptype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pval != null">
+        #{pval,jdbcType=VARCHAR},
+      </if>
+      <if test="psage != null">
+        #{psage,jdbcType=INTEGER},
+      </if>
+      <if test="peage != null">
+        #{peage,jdbcType=INTEGER},
+      </if>
+      <if test="psex != null">
+        #{psex,jdbcType=VARCHAR},
+      </if>
+      <if test="preputation != null">
+        #{preputation,jdbcType=INTEGER},
+      </if>
+      <if test="pmoney != null">
+        #{pmoney,jdbcType=INTEGER},
+      </if>
+      <if test="pstau != null">
+        #{pstau,jdbcType=INTEGER},
+      </if>
+      <if test="pcount != null">
+        #{pcount,jdbcType=INTEGER},
+      </if>
+      <if test="puserid != null">
+        #{puserid,jdbcType=INTEGER},
+      </if>
+      <if test="puserreputation != null">
+        #{puserreputation,jdbcType=INTEGER},
+      </if>
+      <if test="ptype != null">
+       #{ptype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.part_time_job.entity.part_time_job">
+    update part_time_job
+    <set>
+      <if test="pname != null">
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pval != null">
+        pval = #{pval,jdbcType=VARCHAR},
+      </if>
+      <if test="psage != null">
+        psage = #{psage,jdbcType=INTEGER},
+      </if>
+      <if test="peage != null">
+        peage = #{peage,jdbcType=INTEGER},
+      </if>
+      <if test="psex != null">
+        psex = #{psex,jdbcType=VARCHAR},
+      </if>
+      <if test="preputation != null">
+        preputation = #{preputation,jdbcType=INTEGER},
+      </if>
+      <if test="pmoney != null">
+        pmoney = #{pmoney,jdbcType=INTEGER},
+      </if>
+      <if test="pstau != null">
+        pstau = #{pstau,jdbcType=INTEGER},
+      </if>
+      <if test="pcount != null">
+        pcount = #{pcount,jdbcType=INTEGER},
+      </if>
+      <if test="puserid != null">
+        puserid = #{puserid,jdbcType=INTEGER},
+      </if>
+      <if test="puserreputation != null">
+          puserreputation = #{puserreputation,jdbcType=INTEGER},
+      </if>
+      <if test="ptype != null">
+          ptype = #{ptype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.part_time_job.entity.part_time_job">
+    update part_time_job
+    set pname = #{pname,jdbcType=VARCHAR},
+      pval = #{pval,jdbcType=VARCHAR},
+      psage = #{psage,jdbcType=INTEGER},
+      peage = #{peage,jdbcType=INTEGER},
+      psex = #{psex,jdbcType=VARCHAR},
+      preputation = #{preputation,jdbcType=INTEGER},
+      pmoney = #{pmoney,jdbcType=INTEGER},
+      pstau = #{pstau,jdbcType=INTEGER},
+      pcount = #{pcount,jdbcType=INTEGER},
+      puserid = #{puserid,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

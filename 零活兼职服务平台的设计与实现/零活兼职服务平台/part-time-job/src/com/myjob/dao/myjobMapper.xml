@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myjob.dao.myjobMapper">
+  <resultMap id="BaseResultMap" type="com.myjob.entity.myjob">
+    <id column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="muserid" jdbcType="INTEGER" property="muserid" />
+    <result column="mpid" jdbcType="INTEGER" property="mpid" />
+    <result column="mstau" jdbcType="VARCHAR" property="mstau" />
+    <result column="mfuserid" jdbcType="VARCHAR" property="mfuserid" />
+    <result column="mjuserid" jdbcType="VARCHAR" property="mjuserid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mid, muserid, mpid, mstau, mfuserid, mjuserid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from myjob
+    where mid = #{mid,jdbcType=INTEGER}
+  </select>
+  <select id="list" parameterType="com.myjob.entity.myjob" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from myjob
+   <where>
+     1=1
+     <if test="mid != null">
+      and mid = #{mid,jdbcType=INTEGER}
+     </if>
+     <if test="muserid != null">
+       and muserid = #{muserid,jdbcType=INTEGER}
+     </if>
+     <if test="mpid != null">
+       and mpid = #{mpid,jdbcType=INTEGER}
+     </if>
+     <if test="mstau != null">
+       and mstau = #{mstau,jdbcType=VARCHAR}
+     </if>
+     <if test="mfuserid != null">
+       and mfuserid = #{mfuserid,jdbcType=VARCHAR}
+     </if>
+     <if test="mjuserid != null">
+       and  mjuserid = #{mjuserid,jdbcType=VARCHAR}
+     </if>
+   </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from myjob
+    where mid = #{mid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myjob.entity.myjob">
+    insert into myjob (mid, muserid, mpid, 
+      mstau, mfuserid, mjuserid
+      )
+    values (#{mid,jdbcType=INTEGER}, #{muserid,jdbcType=INTEGER}, #{mpid,jdbcType=INTEGER}, 
+      #{mstau,jdbcType=VARCHAR}, #{mfuserid,jdbcType=INTEGER}, #{mjuserid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myjob.entity.myjob">
+    insert into myjob
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="muserid != null">
+        muserid,
+      </if>
+      <if test="mpid != null">
+        mpid,
+      </if>
+      <if test="mstau != null">
+        mstau,
+      </if>
+      <if test="mfuserid != null">
+        mfuserid,
+      </if>
+      <if test="mjuserid != null">
+        mjuserid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="muserid != null">
+        #{muserid,jdbcType=INTEGER},
+      </if>
+      <if test="mpid != null">
+        #{mpid,jdbcType=INTEGER},
+      </if>
+      <if test="mstau != null">
+        #{mstau,jdbcType=VARCHAR},
+      </if>
+      <if test="mfuserid != null">
+        #{mfuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="mjuserid != null">
+        #{mjuserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myjob.entity.myjob">
+    update myjob
+    <set>
+      <if test="muserid != null">
+        muserid = #{muserid,jdbcType=INTEGER},
+      </if>
+      <if test="mpid != null">
+        mpid = #{mpid,jdbcType=INTEGER},
+      </if>
+      <if test="mstau != null">
+        mstau = #{mstau,jdbcType=VARCHAR},
+      </if>
+      <if test="mfuserid != null">
+        mfuserid = #{mfuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="mjuserid != null">
+        mjuserid = #{mjuserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myjob.entity.myjob">
+    update myjob
+    set muserid = #{muserid,jdbcType=INTEGER},
+      mpid = #{mpid,jdbcType=INTEGER},
+      mstau = #{mstau,jdbcType=VARCHAR},
+      mfuserid = #{mfuserid,jdbcType=VARCHAR},
+      mjuserid = #{mjuserid,jdbcType=VARCHAR}
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+</mapper>

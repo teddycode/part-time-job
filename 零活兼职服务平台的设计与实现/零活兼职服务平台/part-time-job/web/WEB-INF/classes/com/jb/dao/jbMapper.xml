@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jb.dao.jbMapper">
+  <resultMap id="BaseResultMap" type="com.jb.entity.jb">
+    <id column="jid" jdbcType="INTEGER" property="jid" />
+    <result column="jpid" jdbcType="INTEGER" property="jpid" />
+    <result column="jval" jdbcType="VARCHAR" property="jval" />
+    <result column="jjg" jdbcType="VARCHAR" property="jjg" />
+    <result column="juserid" jdbcType="INTEGER" property="juserid" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    jid, jpid, jval, jjg,juserid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jb
+    where jid = #{jid,jdbcType=INTEGER}
+  </select>
+  <select id="list" parameterType="com.jb.entity.jb" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from jb
+   <where>
+     1=1
+     <if test="jid != null">
+      and jid = #{jid,jdbcType=INTEGER}
+     </if>
+     <if test="jpid != null">
+       and jpid = #{jpid,jdbcType=INTEGER}
+     </if>
+     <if test="jval != null">
+       and  jval = #{jval,jdbcType=VARCHAR}
+     </if>
+     <if test="jjg != null">
+       and  jjg = #{jjg,jdbcType=VARCHAR}
+     </if>
+   </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jb
+    where jid = #{jid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jb.entity.jb">
+    insert into jb (jid, jpid, jval, 
+      jjg,juserid)
+    values (#{jid,jdbcType=INTEGER}, #{jpid,jdbcType=INTEGER}, #{jval,jdbcType=VARCHAR}, 
+      #{jjg,jdbcType=VARCHAR},#{juserid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jb.entity.jb">
+    insert into jb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jid != null">
+        jid,
+      </if>
+      <if test="jpid != null">
+        jpid,
+      </if>
+      <if test="jval != null">
+        jval,
+      </if>
+      <if test="jjg != null">
+        jjg,
+      </if>
+      <if test="juserid != null">
+        juserid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jid != null">
+        #{jid,jdbcType=INTEGER},
+      </if>
+      <if test="jpid != null">
+        #{jpid,jdbcType=INTEGER},
+      </if>
+      <if test="jval != null">
+        #{jval,jdbcType=VARCHAR},
+      </if>
+      <if test="jjg != null">
+        #{jjg,jdbcType=VARCHAR},
+      </if>
+      <if test="juserid != null">
+                #{juserid,jdbcType=INTEGER},
+
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jb.entity.jb">
+    update jb
+    <set>
+      <if test="jpid != null">
+        jpid = #{jpid,jdbcType=INTEGER},
+      </if>
+      <if test="jval != null">
+        jval = #{jval,jdbcType=VARCHAR},
+      </if>
+      <if test="jjg != null">
+        jjg = #{jjg,jdbcType=VARCHAR},
+      </if>
+      <if test="juserid != null">
+        juserid= #{juserid,jdbcType=INTEGER},
+
+      </if>
+    </set>
+    where jid = #{jid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jb.entity.jb">
+    update jb
+    set jpid = #{jpid,jdbcType=INTEGER},
+      jval = #{jval,jdbcType=VARCHAR},
+      jjg = #{jjg,jdbcType=VARCHAR}
+    where jid = #{jid,jdbcType=INTEGER}
+  </update>
+</mapper>

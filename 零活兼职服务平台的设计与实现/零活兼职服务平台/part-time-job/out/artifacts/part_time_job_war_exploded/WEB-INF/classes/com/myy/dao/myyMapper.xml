@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myy.dao.myyMapper">
+  <resultMap id="BaseResultMap" type="com.myy.entity.myy">
+    <id column="yyid" jdbcType="INTEGER" property="yyid" />
+    <result column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="mval" jdbcType="VARCHAR" property="mval" />
+    <result column="mjg" jdbcType="VARCHAR" property="mjg" />
+    <result column="yyuserid" jdbcType="INTEGER" property="yyuserid" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    yyid, mid, mval, mjg,yyuserid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from myy
+    where yyid = #{yyid,jdbcType=INTEGER}
+  </select>
+  <select id="list" parameterType="com.myy.entity.myy" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from myy
+    <where>
+      1=1
+      <if test="yyid != null">
+      and  yyid = #{yyid,jdbcType=INTEGER}
+      </if>
+      <if test="mid != null">
+        and mid = #{mid,jdbcType=INTEGER}
+      </if>
+      <if test="mval != null">
+        and  mval = #{mval,jdbcType=VARCHAR}
+      </if>
+      <if test="mjg != null">
+        and mjg = #{mjg,jdbcType=VARCHAR}
+      </if>
+      <if test="yyuserid != null">
+        and yyuserid = #{yyuserid,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from myy
+    where yyid = #{yyid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myy.entity.myy">
+    insert into myy (yyid, mid, mval, 
+      mjg,yyuserid)
+    values (#{yyid,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{mval,jdbcType=VARCHAR}, 
+      #{mjg,jdbcType=VARCHAR},#{yyuserid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myy.entity.myy">
+    insert into myy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="yyid != null">
+        yyid,
+      </if>
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="mval != null">
+        mval,
+      </if>
+      <if test="mjg != null">
+        mjg,
+      </if><if test="yyuserid != null">
+      yyuserid,
+    </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="yyid != null">
+        #{yyid,jdbcType=INTEGER},
+      </if>
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mval != null">
+        #{mval,jdbcType=VARCHAR},
+      </if>
+      <if test="mjg != null">
+        #{mjg,jdbcType=VARCHAR},
+      </if>
+      <if test="yyuserid != null">
+        #{yyuserid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myy.entity.myy">
+    update myy
+    <set>
+      <if test="mid != null">
+        mid = #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mval != null">
+        mval = #{mval,jdbcType=VARCHAR},
+      </if>
+      <if test="mjg != null">
+        mjg = #{mjg,jdbcType=VARCHAR},
+      </if>
+      <if test="yyuserid != null">
+        mjg=  #{yyuserid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where yyid = #{yyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myy.entity.myy">
+    update myy
+    set mid = #{mid,jdbcType=INTEGER},
+      mval = #{mval,jdbcType=VARCHAR},
+      mjg = #{mjg,jdbcType=VARCHAR}
+    where yyid = #{yyid,jdbcType=INTEGER}
+  </update>
+</mapper>
